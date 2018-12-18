@@ -7,7 +7,7 @@ export const PARAM_SEARCH = "?query=";
 
 export const fetchHackerNewsData = async () => {
   try {
-    const response = await fetch(`http://hn.algolia.com/api/v1/search`);
+    const response = await fetch(`http://hn.algolia.com/api/v1/search?tags=front_page`);
     if (!response.ok) { throw new Error("fetch failed") }
     const result = await response.json();
     return result;

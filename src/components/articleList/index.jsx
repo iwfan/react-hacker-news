@@ -1,18 +1,19 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import Article from './article';
 
-const ArticleList = ({ articles }) => (
-  <main className="hn__content">
-    <div className="content-wrap center-content">
-      {
-        articles && articles.length && articles.map(article => <article key={ article.objectID }>
-          <h1><a href={ article.url }>{ article.title }</a></h1>
-            { console.log(article) }
-         <span>{article.points}</span> | <span>{ article.author }</span>| <span>{ article.num_comments }</span>
-        </article>)
-      }
-    </div>
-  </main>
+const ArticleList = ({ articles, pageNo, pageSize }) => (
+  <div className="article-list center-content">
+    {
+      articles.map(( article, index ) =>
+        <Article
+          key={ article.objectID }
+          number={pageNo * pageSize + index + 1}
+          article={ article }
+        />
+      )
+    }
+  </div>
 );
 
 ArticleList.propTypes = {
