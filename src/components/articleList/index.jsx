@@ -2,13 +2,14 @@ import React from "react";
 import PropTypes from 'prop-types';
 import Article from './article';
 
-const ArticleList = ({ articles, pageNo, pageSize }) => (
+const ArticleList = ({ articles, pageNo, pageSize, onDismiss }) => (
   <div className="article-list center-content">
     {
       articles.map(( article, index ) =>
         <Article
           key={ article.objectID }
           number={pageNo * pageSize + index + 1}
+          dismiss={ onDismiss }
           article={ article }
         />
       )
@@ -18,6 +19,7 @@ const ArticleList = ({ articles, pageNo, pageSize }) => (
 
 ArticleList.propTypes = {
   articles: PropTypes.array.isRequired,
+  onDismiss: PropTypes.func.isRequired,
 };
 
 export default ArticleList;
