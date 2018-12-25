@@ -30,8 +30,8 @@ const Article = ({ article, number, dismiss }) => (
         className="article-item__link"
         >{ article.author }</a>
         &nbsp;|&nbsp;
-        <a className="article-item__link">1 hours ago</a>
-        &nbsp;|&nbsp;
+        {/*<a className="article-item__link">1 hours ago</a>*/}
+        {/*&nbsp;|&nbsp;*/}
         <a
           className="article-item__link"
           onClick={() => dismiss(article.objectID)}
@@ -48,11 +48,11 @@ const Article = ({ article, number, dismiss }) => (
 Article.propTypes = {
   article: PropTypes.shape({
     objectID: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
-    points: PropTypes.number.isRequired,
-    num_comments: PropTypes.number.isRequired,
+    url: PropTypes.string,
+    title: PropTypes.string,
+    author: PropTypes.string,
+    points: PropTypes.number,
+    num_comments: PropTypes.number,
   }),
   dismiss: PropTypes.func.isRequired,
 }

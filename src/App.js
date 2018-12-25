@@ -12,11 +12,10 @@ class App extends Component {
     searchText: "",
     loading: false,
     error: false,
-  }
-
-  pageInfo = {
-    no: 0,
-    size: 20,
+    articlesCount: 0,
+    pageCount: 0,
+    pageNumber: 0,
+    pageSize: 0,
   }
 
   componentDidMount() {
@@ -29,22 +28,31 @@ class App extends Component {
       articles: result
     }))
   }
+
   handleLoadMore = () => {
-    this.pageInfo.no += 1;
-    this.loadData();
+    this.loadData(this.state.pageNumber + 1);
   }
 
-  loadData() {
+  async loadData(pageNo) {
     this.setState({ loading: true });
-    fetchHackerNewsData(this.state.searchText, this.pageInfo.no).then(data => {
-      console.log(data)
-      this.pageInfo.no = data.page;
-      this.pageInfo.size = data.hitsPerPage;
-      this.setState((prev) => ({ articles: [...prev.articles, ...data.hits], loading: false }))
-    });
+    try {
+      const data = await fetchHackerNewsData(this.state.searchText, pageNo)
+      // console.log(data)
+      this.setState((prev) => ({
+        loading: false,
+        pageNumber: data.page,
+        pageCount: data.nbPages,
+        pageSize: data.hitsPerPage,
+        articlesCount: data.nbHits,
+        articles: [...prev.articles, ...data.hits]
+      }))
+    } catch (exception) {
+      this.setState({ loading: false, error: exception.message })
+    }
   }
 
   render() {
+    const restItems = this.state.articlesCount - this.state.articles.length;
     return (
       <div className="hn-app">
         <Header/>
@@ -66,11 +74,14 @@ class App extends Component {
               {
                 this.state.loading
                   ? <Loading/>
-                  : <LoadMore
+                  : restItems > 0
+                  ?
+                  <LoadMore
                     onClick={ this.handleLoadMore }
                   >
-                    See xxx more articles
+                    See { this.state.articlesCount - this.state.articles.length } more articles
                   </LoadMore>
+                  : null
               }
             </div>
           }
