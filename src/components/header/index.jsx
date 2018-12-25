@@ -19,8 +19,8 @@ class Header extends React.PureComponent {
   }
 
   render() {
-    const { searchText } = this.state;
-    const { searchChange } = this.props;
+    // const { searchText } = this.state;
+    // const { searchChange } = this.props;
     return (
       <header className="hn__header">
         <nav className="user-nav center-content">
