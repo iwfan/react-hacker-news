@@ -1,27 +1,39 @@
 import React from "react";
 import PropTypes from "prop-types";
 import './header.scss'
+import SingleInputSearch from "./SingleInputSearch";
 
 class Header extends React.PureComponent {
   static propTypes = {
-    searchText: PropTypes.string,
-    searchChange: PropTypes.func,
-  }
-  static defaultProps = {
-    searchText: ""
-  }
-
-  static getDrivedStateFromProps() {
-
+    onSearchTextChange: PropTypes.func.isRequired,
   }
 
   state = {
-    searchText: this.props.searchText
+    searchText: ''
   }
 
+  handleSearchChange = () => {
+    const {searchText: keywords} = this.state;
+    const text = ''.trim.call(keywords);
+    if (text.length > 0) {
+      this.props.onSearchTextChange(text);
+      this.setState({searchText: ''})
+    }
+  }
+
+  handleInputChange = (evt) => {
+    const {target: {value}} = evt;
+    this.setState({
+      searchText: value
+    })
+  }
+
+  handleKeydown = (evt) => {
+    if (evt.keyCode === 13) {
+      this.handleSearchChange();
+    }
+  }
   render() {
-    // const { searchText } = this.state;
-    // const { searchChange } = this.props;
     return (
       <header className="hn__header">
         <nav className="user-nav center-content">
@@ -30,8 +42,12 @@ class Header extends React.PureComponent {
               <a href="/"><b><span className="hn-logo__brand">Y</span>Hacker News</b></a>
             </li>
             <li className="user-nav__item user-nav__search">
-              <input className='search__text' type="text"/>
-              <input className='search__btn' type="button" value="🔍"/>
+              <SingleInputSearch
+                searchText={this.state.searchText}
+                onInputChange={this.handleInputChange}
+                onSearchTextChange={this.handleSearchChange}
+                onKeyDown={this.handleKeydown}
+              />
             </li>
           </ul>
         </nav>
