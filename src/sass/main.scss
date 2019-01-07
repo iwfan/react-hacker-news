@@ -1,0 +1,23 @@
+//@import "variables";
+@import "base";
+
+.center-content {
+  margin: 0 auto;
+  @media (min-width: 300px) {
+    width: 90%;
+  }
+  @media (min-width: 600px) {
+    width: 80%;
+  }
+  @media (min-width: 1200px) {
+    width: 70%;
+  }
+}
+
+.center-text {
+  text-align: center;
+}
+
+.hn-app {
+  margin-top: 3.57rem;
+}

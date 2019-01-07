@@ -26,20 +26,20 @@ const Article = ({ article, number, dismiss }) => (
         </a>
       </h1>
       <p>
-        { article.points } points by <a
+        { article.points } points by <button
         className="article-item__link"
-        >{ article.author }</a>
+        >{ article.author }</button>
         &nbsp;|&nbsp;
         {/*<a className="article-item__link">1 hours ago</a>*/}
         {/*&nbsp;|&nbsp;*/}
-        <a
+        <button
           className="article-item__link"
           onClick={() => dismiss(article.objectID)}
-        >hide</a>
+        >hide</button>
         &nbsp;|&nbsp;
-        <a
+        <button
           className="article-item__link"
-          >{ article.num_comments } comments</a>
+          >{ article.num_comments } comments</button>
       </p>
     </section>
   </article>

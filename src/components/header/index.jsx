@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
+import './header.scss'
 
 class Header extends React.PureComponent {
-  static  propTypes = {
+  static propTypes = {
     searchText: PropTypes.string,
     searchChange: PropTypes.func,
   }
-  static  defaultProps = {
+  static defaultProps = {
     searchText: ""
   }
 
@@ -28,16 +29,10 @@ class Header extends React.PureComponent {
             <li className="user-nav__item hn-logo">
               <a href="/"><b><span className="hn-logo__brand">Y</span>Hacker News</b></a>
             </li>
-            <li className="user-nav__item user-nav__item--active">
-              <a>news</a>
+            <li className="user-nav__item user-nav__search">
+              <input className='search__text' type="text"/>
+              <input className='search__btn' type="button" value="🔍"/>
             </li>
-            {/*<li className="user-nav__item">*/}
-              {/*<a>top</a>*/}
-            {/*</li>*/}
-            {/*<li className="user-nav__item">*/}
-              {/*<input type="text"/>*/}
-              {/*<a>search</a>*/}
-            {/*</li>*/}
           </ul>
         </nav>
       </header>

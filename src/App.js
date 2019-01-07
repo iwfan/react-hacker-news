@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Header from './components/header'
 import ArticleList from './components/articleList';
-import './a.scss'
-import { fetchHackerNewsData } from "./constants";
+import { fetchHackerNewsData } from "./Api";
 import Loading from "./components/loading";
 import LoadMore from "./components/loadMore";
+import './sass/main.scss'
 
 class App extends Component {
   state = {
@@ -52,42 +52,55 @@ class App extends Component {
   }
 
   render() {
-    const restItems = this.state.articlesCount - this.state.articles.length;
     return (
       <div className="hn-app">
-        <Header/>
-        <main className="hn-content">
-          {
-            this.state.articles.length > 0
-            &&
-            <ArticleList
-              articles={ this.state.articles }
-              pageNo={ 0 }
-              pageSize={ this.state.articles.length }
-              onDismiss={ this.handleDismiss }
-            />
-          }
-        </main>
-        <footer className="hn__footer">
-          {
-            <div className="center-content center-text">
-              {
-                this.state.loading
-                  ? <Loading/>
-                  : restItems > 0
-                  ?
-                  <LoadMore
-                    onClick={ this.handleLoadMore }
-                  >
-                    See { this.state.articlesCount - this.state.articles.length } more articles
-                  </LoadMore>
-                  : null
-              }
-            </div>
-          }
-        </footer>
+        { this.renderHeader() }
+        { this.renderList() }
       </div>
     );
+  }
+
+  renderHeader() {
+    return <Header/>
+  }
+
+  renderList() {
+    return (
+      <main className="hn-content">
+        {
+          this.state.articles.length > 0
+          &&
+          <ArticleList
+            articles={ this.state.articles }
+            pageNo={ 0 }
+            pageSize={ this.state.articles.length }
+            onDismiss={ this.handleDismiss }
+          />
+        }
+      </main>
+    )
+  }
+
+  renderFooter() {
+    const restItems = this.state.articlesCount - this.state.articles.length;
+    return (<footer className="hn__footer">
+      {
+        <div className="center-content center-text">
+          {
+            this.state.loading
+              ? <Loading/>
+              : restItems > 0
+              ?
+              <LoadMore
+                onClick={ this.handleLoadMore }
+              >
+                See { this.state.articlesCount - this.state.articles.length } more articles
+              </LoadMore>
+              : null
+          }
+        </div>
+      }
+    </footer>)
   }
 }
 

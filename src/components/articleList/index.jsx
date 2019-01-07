@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import Article from './article';
-
+import './articleList.scss'
 const ArticleList = ({ articles, pageNo, pageSize, onDismiss }) => (
   <div className="article-list center-content">
     {

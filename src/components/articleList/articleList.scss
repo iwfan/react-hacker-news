@@ -1,0 +1,51 @@
+@import "../../sass/variables";
+
+.article-list {
+  padding-top: 1.4rem;
+}
+
+.article-item {
+  padding: 0 0 .8rem 0;
+  display: flex;
+
+  &__number {
+    min-width: 2rem;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    color: $secondary-text-color;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__title {
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: $primary-text-color;
+  }
+
+  &__link {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__domain {
+    font-size: .8rem;
+    margin-left: 3px;
+    color: $secondary-text-color;
+  }
+
+  & p {
+    font-size: .8rem;
+    color: $secondary-text-color;
+  }
+}

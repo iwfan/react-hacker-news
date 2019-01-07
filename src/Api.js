@@ -4,10 +4,9 @@ export const PARAM_SEARCH = "query=";
 export const TAG_SEARCH = "tags=";
 export const PAGE_SEARCH = "page=";
 
-
 export const fetchHackerNewsData = async (searchText = "", pageNo = 0) => {
   try {
-    const response = await fetch(`${ BASE_URL }/${ PATH_SEARCH }?${ PARAM_SEARCH }${ searchText }&${ TAG_SEARCH }front_page&${ PAGE_SEARCH }${ pageNo }`);
+    const response = await fetch(`${ BASE_URL }/${ PATH_SEARCH }?${ PARAM_SEARCH }${ searchText }&${ PAGE_SEARCH }${ pageNo }`);
     if (!response.ok) {
       throw new Error("fetch failed")
     }
